@@ -60,7 +60,7 @@
             this.inputTextBox.Size = new System.Drawing.Size(479, 57);
             this.inputTextBox.TabIndex = 0;
             this.inputTextBox.Text = "";
-            this.inputTextBox.TextChanged += new System.EventHandler(this.inputTextBox_TextChanged);
+            this.inputTextBox.TextChanged += new System.EventHandler(this.InputTextBox_TextChanged);
             // 
             // panel1
             // 
@@ -112,6 +112,8 @@
             this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.richTextBox1.Size = new System.Drawing.Size(479, 392);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
@@ -120,7 +122,7 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 32;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // menuStrip1
             // 
@@ -141,7 +143,7 @@
             this.fIleToolStripMenuItem.Name = "fIleToolStripMenuItem";
             this.fIleToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fIleToolStripMenuItem.Text = "File";
-            this.fIleToolStripMenuItem.Click += new System.EventHandler(this.alwaysOnTopToolStripMenuItem_Click);
+            this.fIleToolStripMenuItem.Click += new System.EventHandler(this.AlwaysOnTopToolStripMenuItem_Click);
             // 
             // alwaysOnTopToolStripMenuItem
             // 
@@ -149,7 +151,7 @@
             this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
             this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.alwaysOnTopToolStripMenuItem.Text = "Always on top";
-            this.alwaysOnTopToolStripMenuItem.CheckedChanged += new System.EventHandler(this.alwaysOnTopToolStripMenuItem_Click);
+            this.alwaysOnTopToolStripMenuItem.CheckedChanged += new System.EventHandler(this.AlwaysOnTopToolStripMenuItem_Click);
             // 
             // popoutFuriganaToolStripMenuItem
             // 
@@ -157,7 +159,7 @@
             this.popoutFuriganaToolStripMenuItem.Name = "popoutFuriganaToolStripMenuItem";
             this.popoutFuriganaToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.popoutFuriganaToolStripMenuItem.Text = "Popout Furigana";
-            this.popoutFuriganaToolStripMenuItem.Click += new System.EventHandler(this.popoutFuriganaToolStripMenuItem_Click);
+            this.popoutFuriganaToolStripMenuItem.Click += new System.EventHandler(this.PopoutFuriganaToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -166,7 +168,7 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
             this.toolStripMenuItem1.Text = "Popout always on top";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuItem1_Click);
             // 
             // Form1
             // 

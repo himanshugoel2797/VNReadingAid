@@ -5,10 +5,10 @@
 </head>
 <body>
     <div>
-        <p id="output_romaji">Romaji</p>
+        <p id="output_romaji"></p>
     </div>
     <div>
-        <p id="output_kana">Kana</p>
+        <p id="output_kana"></p>
     </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kuroshiro@1.1.2/dist/kuroshiro.min.js"></script>
@@ -19,10 +19,7 @@
         var kuroshiro = new Kuroshiro();
 
         async function translate_furigana(text, sz) {
-            document.getElementById("output_romaji").innerHTML = "Start";
-
             if (!init_done) {
-                document.getElementById("output_romaji").innerHTML = "Init";
                 await kuroshiro.init(new KuromojiAnalyzer({ dictPath: "https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict/" }));
                 init_done = true;
             }
@@ -31,7 +28,7 @@
             document.getElementById("output_romaji").innerHTML = result;
             document.getElementById("output_romaji").style.fontSize = sz;
 
-            result = await kuroshiro.convert(text, { mode: "furigana", to: "hiragana" })
+            result = await kuroshiro.convert(text, { mode: "furigana", to: "hiragana" });
             document.getElementById("output_kana").innerHTML = result;
             document.getElementById("output_kana").style.fontSize = sz;
         }
