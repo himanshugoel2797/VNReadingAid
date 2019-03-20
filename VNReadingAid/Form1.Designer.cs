@@ -40,6 +40,9 @@
             this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.popoutFuriganaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.showRomajiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showKanaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -139,7 +142,10 @@
             this.fIleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alwaysOnTopToolStripMenuItem,
             this.popoutFuriganaToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.toolStripSeparator1,
+            this.showRomajiToolStripMenuItem,
+            this.showKanaToolStripMenuItem});
             this.fIleToolStripMenuItem.Name = "fIleToolStripMenuItem";
             this.fIleToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fIleToolStripMenuItem.Text = "File";
@@ -169,6 +175,31 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
             this.toolStripMenuItem1.Text = "Popout always on top";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
+            // 
+            // showRomajiToolStripMenuItem
+            // 
+            this.showRomajiToolStripMenuItem.Checked = true;
+            this.showRomajiToolStripMenuItem.CheckOnClick = true;
+            this.showRomajiToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showRomajiToolStripMenuItem.Name = "showRomajiToolStripMenuItem";
+            this.showRomajiToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.showRomajiToolStripMenuItem.Text = "Show Romaji";
+            this.showRomajiToolStripMenuItem.Click += new System.EventHandler(this.showRomajiToolStripMenuItem_Click);
+            // 
+            // showKanaToolStripMenuItem
+            // 
+            this.showKanaToolStripMenuItem.Checked = true;
+            this.showKanaToolStripMenuItem.CheckOnClick = true;
+            this.showKanaToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showKanaToolStripMenuItem.Name = "showKanaToolStripMenuItem";
+            this.showKanaToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.showKanaToolStripMenuItem.Text = "Show Kana";
+            this.showKanaToolStripMenuItem.Click += new System.EventHandler(this.showKanaToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -209,6 +240,9 @@
         private System.Windows.Forms.ToolStripMenuItem alwaysOnTopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem popoutFuriganaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem showRomajiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showKanaToolStripMenuItem;
     }
 }
 

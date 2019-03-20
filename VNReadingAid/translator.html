@@ -16,6 +16,8 @@
     <script type="text/javascript">
         // Function With Parameters
         var init_done = false;
+        var romaji_en = true;
+        var kana_en = true;
         var kuroshiro = new Kuroshiro();
 
         async function translate_furigana(text, sz) {
@@ -24,13 +26,35 @@
                 init_done = true;
             }
 
-            var result = await kuroshiro.convert(text, { mode: "furigana", to: "romaji" });
-            document.getElementById("output_romaji").innerHTML = result;
-            document.getElementById("output_romaji").style.fontSize = sz;
+            if (romaji_en) {
+                var result = await kuroshiro.convert(text, { mode: "furigana", to: "romaji" });
+                document.getElementById("output_romaji").innerHTML = result;
+                document.getElementById("output_romaji").style.fontSize = sz;
+            }
 
-            result = await kuroshiro.convert(text, { mode: "furigana", to: "hiragana" });
-            document.getElementById("output_kana").innerHTML = result;
-            document.getElementById("output_kana").style.fontSize = sz;
+            if (kana_en) {
+                var result = await kuroshiro.convert(text, { mode: "furigana", to: "hiragana" });
+                document.getElementById("output_kana").innerHTML = result;
+                document.getElementById("output_kana").style.fontSize = sz;
+            }
+        }
+
+        function toggle_romaji() {
+            romaji_en = !romaji_en;
+            if (!romaji_en) {
+                document.getElementById("output_romaji").style.visibility = "hidden";
+            } else {
+                document.getElementById("output_romaji").style.visibility = "visible";
+            }
+        }
+
+        function toggle_kana() {
+            kana_en = !kana_en;
+            if (!kana_en) {
+                document.getElementById("output_kana").style.visibility = "hidden";
+            } else {
+                document.getElementById("output_kana").style.visibility = "visible";
+            }
         }
     </script>
 

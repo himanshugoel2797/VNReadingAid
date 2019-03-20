@@ -162,5 +162,15 @@ namespace VNReadingAid
         {
             this.TopMost = alwaysOnTopToolStripMenuItem.Checked;
         }
+
+        private async void showRomajiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await browser.EvaluateScriptAsync("toggle_romaji()");
+        }
+
+        private async void showKanaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await browser.EvaluateScriptAsync("toggle_kana()");
+        }
     }
 }
