@@ -71,7 +71,7 @@ namespace VNReadingAid
 
                         var brush = TxtBrush;
                         if (textIsSelected | selectingText)
-                            if (Math.Min(startPos.X, curPos.X) <= bnds.X + bnds.Width / 2 && Math.Max(curPos.X, startPos.X) >= bnds.X + bnds.Width / 2 && Math.Min(startPos.Y, curPos.Y) <= bnds.Y && Math.Max(curPos.Y, startPos.Y) >= bnds.Height)
+                            if (Math.Min(startPos.X, curPos.X) <= bnds.X + bnds.Width / 2 && Math.Max(curPos.X, startPos.X) >= bnds.X + bnds.Width / 2 && Math.Min(startPos.Y, curPos.Y) <= bnds.Y && Math.Max(curPos.Y, startPos.Y) >= bnds.Y + bnds.Height)
                             {
                                 brush = highlightTxtBrush;
                                 g.FillRectangle(SystemBrushes.Highlight, bnds);

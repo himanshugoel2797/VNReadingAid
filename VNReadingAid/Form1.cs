@@ -59,35 +59,49 @@ namespace VNReadingAid
             if (defWindow != null)
                 defWindow.Hide();
 
-            try
+            var words_base = tagger.Parse(itext).Split('\n').Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a));
+            var base_words = words_base.Select(a => a.Split('\t')[1].Split(',')[6]).ToArray();
+            var kana = words_base.Select(a =>
             {
-                var words_base = tagger.Parse(itext).Split('\n');
-                var base_words = words_base.Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a)).Select(a => a.Split('\t')[1].Split(',')[6]).ToArray();
-                var kana = words_base.Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a)).Select(a => KanaConverter.KatakanaToHiragana(a.Split('\t')[1].Split(',')[7])).ToArray();
-                var romaji = kana.Select(a => transliterator.GetRomaji(a)).ToArray();
-                var words = words_base.Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a)).Select(a => a.Split('\t')[0]).ToArray();
-
-                int i = 0;
+                var strs = a.Split('\t')[1].Split(',');
+                if (strs.Length > 7)
+                    return KanaConverter.KatakanaToHiragana(strs[7]);
+                else
+                    return a.Split('\t')[0].Trim();
+            }).ToArray();
+            var romaji = kana.Select(a =>
+            {
+                try
                 {
-                    if (base_words[i].Trim() == "*")
-                        base_words[i] = words[i];
-
-                    if (japDict.ContainsKey(base_words[i]))
-                    {
-                        defWindow = new DefinitionWindow(base_words[i], words[i], romaji[i], japDict[base_words[i]].Senses.First(a => a.Glosses.Any(b => b.Language == Language.English)).Glosses.First().Term);
-                        defWindow.Location = Cursor.Position;
-                        defWindow.Show();
-                    }
-                    /*else
-                        foreach (char c in base_words[i])
-                            if (kanjiDict.ContainsKey(c.ToString()))
-                            {
-                                var kan = kanjiDict[c.ToString()];
-                                f_defs += kan.Literal + " - " + kan.Meanings.First(a => a.Language == Language.English).Term + "\n";
-                            }*/
+                    return transliterator.GetRomaji(a);
                 }
+                catch (TransliterationException)
+                {
+                    return a;
+                }
+            }).ToArray();
+            var words = words_base.Select(a => a.Split('\t')[0]).ToArray();
+
+            if (base_words.Length == 0) return;
+
+            int i = 0;
+            if (base_words[i].Trim() == "*")
+                base_words[i] = words[i];
+
+            if (japDict.ContainsKey(base_words[i]))
+            {
+                defWindow = new DefinitionWindow(base_words[i], words[i], romaji[i], japDict[base_words[i]].Senses.First(a => a.Glosses.Any(b => b.Language == Language.English)).Glosses.First().Term);
+                defWindow.Location = Cursor.Position;
+                defWindow.TopMost = true;
+                defWindow.Show();
             }
-            catch (Exception) { }
+            /*else
+                foreach (char c in base_words[i])
+                    if (kanjiDict.ContainsKey(c.ToString()))
+                    {
+                        var kan = kanjiDict[c.ToString()];
+                        f_defs += kan.Literal + " - " + kan.Meanings.First(a => a.Language == Language.English).Term + "\n";
+                    }*/
         }
 
         private void InputTextBox_TextChanged(object sender, EventArgs e)
