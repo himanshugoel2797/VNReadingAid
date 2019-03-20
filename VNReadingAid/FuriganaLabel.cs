@@ -61,24 +61,25 @@ namespace VNReadingAid
 
                 var sz_c_word = g.MeasureCharacterRanges(words[i], f_word, new RectangleF(x_pos, y_pos + sz_furi.Height, sz_word.Width, sz_word.Height), fmt);
 
-                if (furigana[i] != words[i])
+                if (words[i].All(a => a < 128) | furigana[i] != words[i])
                     g.DrawString(furigana[i], f_furi, TxtBrush, (int)sz_c_word[0].GetBounds(g).X, y_pos);
 
-                for (int j = 0; j < sz_c_word.Length; j++)
-                {
-                    var bnds = sz_c_word[j].GetBounds(g);
+                if (words[i].All(a => a >= 128))
+                    for (int j = 0; j < sz_c_word.Length; j++)
+                    {
+                        var bnds = sz_c_word[j].GetBounds(g);
 
-                    var brush = TxtBrush;
-                    if (textIsSelected | selectingText)
-                        if (Math.Min(startPos.X, curPos.X) <= bnds.X + bnds.Width / 2 && Math.Max(curPos.X, startPos.X) >= bnds.X + bnds.Width / 2 && Math.Min(startPos.Y, curPos.Y) <= bnds.Y && Math.Max(curPos.Y, startPos.Y) >= bnds.Height)
-                        {
-                            brush = highlightTxtBrush;
-                            g.FillRectangle(SystemBrushes.Highlight, bnds);
-                            SelectedText += words[i][j];
-                        }
+                        var brush = TxtBrush;
+                        if (textIsSelected | selectingText)
+                            if (Math.Min(startPos.X, curPos.X) <= bnds.X + bnds.Width / 2 && Math.Max(curPos.X, startPos.X) >= bnds.X + bnds.Width / 2 && Math.Min(startPos.Y, curPos.Y) <= bnds.Y && Math.Max(curPos.Y, startPos.Y) >= bnds.Height)
+                            {
+                                brush = highlightTxtBrush;
+                                g.FillRectangle(SystemBrushes.Highlight, bnds);
+                                SelectedText += words[i][j];
+                            }
 
-                    g.DrawString(words[i][j].ToString(), f_word, brush, bnds);
-                }
+                        g.DrawString(words[i][j].ToString(), f_word, brush, bnds.X, bnds.Y);
+                    }
 
 
                 x_pos += (int)Math.Max(sz_word.Width, sz_furi.Width);

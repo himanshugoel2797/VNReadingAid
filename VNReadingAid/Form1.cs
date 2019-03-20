@@ -66,7 +66,7 @@ namespace VNReadingAid
                 var kana = words_base.Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a)).Select(a => KanaConverter.KatakanaToHiragana(a.Split('\t')[1].Split(',')[7])).ToArray();
                 var romaji = kana.Select(a => transliterator.GetRomaji(a)).ToArray();
                 var words = words_base.Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a)).Select(a => a.Split('\t')[0]).ToArray();
-                
+
                 int i = 0;
                 {
                     if (base_words[i].Trim() == "*")
@@ -97,8 +97,25 @@ namespace VNReadingAid
             string itext = inputTextBox.Text;
             var words_base = tagger.Parse(itext).Split('\n');
             var base_words = words_base.Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a)).Select(a => a.Split('\t')[1].Split(',')[6]).ToArray();
-            var kana = words_base.Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a)).Select(a => KanaConverter.KatakanaToHiragana(a.Split('\t')[1].Split(',')[7])).ToArray();
-            var romaji = kana.Select(a => transliterator.GetRomaji(a)).ToArray();
+            var kana = words_base.Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a)).Select(a =>
+            {
+                var strs = a.Split('\t')[1].Split(',');
+                if (strs.Length > 7)
+                    return KanaConverter.KatakanaToHiragana(strs[7]);
+                else
+                    return a.Split('\t')[0].Trim();
+            }).ToArray();
+            var romaji = kana.Select(a =>
+            {
+                try
+                {
+                    return transliterator.GetRomaji(a);
+                }
+                catch (TransliterationException)
+                {
+                    return a;
+                }
+            }).ToArray();
             var words = words_base.Where(a => !filters.Contains(a.Split('\t')[0]) && !string.IsNullOrEmpty(a)).Select(a => a.Split('\t')[0]).ToArray();
 
 
